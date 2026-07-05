@@ -1,4 +1,4 @@
-# ✈ Radarfly
+# Radarfly
 
 **Radar de tráfico aéreo en tiempo real, en un solo archivo HTML.**
 
