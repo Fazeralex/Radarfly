@@ -312,7 +312,7 @@ function classify(p){
     if(rate < -250) return "llegada";
     // cerca y a baja cota sin régimen claro: usa el rumbo relativo al aeropuerto
     const brgToApt = bearing({lat:p.lat,lon:p.lon}, GCLP);
-    let diff = Math.abs(((p.track ?? brgToApt) - brgToApt + 540)%360 - 180);
+    let diff = Math.abs(((p.track != null ? p.track : brgToApt) - brgToApt + 540)%360 - 180);
     return diff < 90 ? "llegada" : "salida";   // se acerca=llegada, se aleja=salida
   }
   return "ruta";
@@ -817,7 +817,7 @@ function select(hex){
       <span class="cs">${p.cs}</span><span style="font-size:11px;opacity:.6">${statusLabel(p.status)}</span>
       <button class="x" id="detClose">✕</button></div>
     <div style="padding:8px 10px;border-bottom:1px solid var(--line);font-size:14px">✈ ${alTxt}</div>
-    ${routeHtml(routeCache[(p.cs||"").trim()] ?? "…")}
+    ${routeHtml((routeCache[(p.cs||"").trim()] != null ? routeCache[(p.cs||"").trim()] : "…"))}
     <div class="grid">
       <div class="g"><div class="k">MATRÍCULA</div><div class="v">${p.reg||"—"}</div></div>
       <div class="g"><div class="k">TIPO</div><div class="v">${p.type||"—"}</div></div>
